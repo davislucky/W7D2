@@ -12,8 +12,9 @@ class UsersController < ApplicationController
             login!(@user)
             redirect_to user_url
         else
-            flash.now[:errors] = ["Cannot find a user with that email or password"]
+            flash.now[:errors] = @user.error.full_messages
             render :new
+        end
     end
 
     def show
