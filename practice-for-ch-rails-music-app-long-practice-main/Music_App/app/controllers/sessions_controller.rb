@@ -1,6 +1,6 @@
 class SessionsController < ApplicationController
-    before_action :require_logged_in, only: [:destroy]
-    before_action :require_logged_out, only: [:create, :new]
+    # before_action :require_logged_in, only: [:destroy]
+    # before_action :require_logged_out, only: [:create, :new]
 
     def new
         render :new
@@ -14,7 +14,7 @@ class SessionsController < ApplicationController
             render :new
         else
             login!(user)
-            redirect_to user_url
+            redirect_to user_url(user)
         end
     end
 

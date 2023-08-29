@@ -1,8 +1,12 @@
 class UsersController < ApplicationController
-    before_action :require_logged_out
+    # before_action :require_logged_out, only: [:create, :new]
 
     def new
         @user = User.new
+    end
+
+    def index
+        render :index
     end
 
     def create
@@ -10,9 +14,9 @@ class UsersController < ApplicationController
 
         if @user.save
             login!(@user)
-            redirect_to user_url
+            redirect_to user_url(@user)
         else
-            flash.now[:errors] = @user.error.full_messages
+            flash.now[:errors] = @user.errors.full_messages
             render :new
         end
     end
